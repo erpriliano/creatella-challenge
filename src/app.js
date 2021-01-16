@@ -1,6 +1,4 @@
 import React from 'react';
-import { render } from 'react-dom';
-
 import Home from './home';
 
 const App = () => {
@@ -11,4 +9,4 @@ const App = () => {
     );
 };
 
-render(<App />, document.getElementById('root'));
+export default App;
