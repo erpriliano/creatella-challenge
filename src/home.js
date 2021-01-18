@@ -20,8 +20,10 @@ const Home = () => {
             .catch((error) => console.log(error));
     };
 
+    console.log('Products length: ', products.length);
+
     return (
-        <div className="bg-gray-100">
+        <div className="bg-gray-100 min-h-screen">
             {/* Header Section */}
             <div className="w-full bg-white top-0 inset-x-0 px-6 py-3 z-10 fixed shadow-lg">
                 <h1 className="font-bold tracking-wide text-lg">
@@ -52,17 +54,21 @@ const Home = () => {
             </div>
             {/* End of ads section */}
 
-            <div className="w-full grid grid-cols-3 gap-4 p-6 py-2">
-                {products.map((product) => (
-                    <ProductCard
-                        key={product.id}
-                        product={product.face}
-                        size={product.size}
-                        price={product.size}
-                        date={product.date}
-                    />
-                ))}
-            </div>
+            {products.length === 0 ? (
+                <div className="spinner"></div>
+            ) : (
+                <div className="w-full grid grid-cols-3 gap-4 p-6 py-2">
+                    {products.map((product) => (
+                        <ProductCard
+                            key={product.id}
+                            product={product.face}
+                            size={product.size}
+                            price={product.size}
+                            date={product.date}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
