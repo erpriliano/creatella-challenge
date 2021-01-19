@@ -3,14 +3,16 @@ import ProductCard from './product-card';
 
 const Home = () => {
     const baseUrl = 'http://localhost:3000';
+
+    const [selected, setSelected] = useState(null);
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        loadData();
-    }, []);
+        loadData(selected);
+    }, [selected]);
 
-    const loadData = () => {
-        fetch(`${baseUrl}/products`)
+    const loadData = (selected) => {
+        fetch(`${baseUrl}/products?_sort=${selected}`)
             .then((response) => {
                 return response.json();
             })
@@ -19,8 +21,6 @@ const Home = () => {
             })
             .catch((error) => console.log(error));
     };
-
-    console.log('Products length: ', products.length);
 
     return (
         <div className="bg-gray-100 min-h-screen">
@@ -54,20 +54,43 @@ const Home = () => {
             </div>
             {/* End of ads section */}
 
+            {console.log('Product length: ', products.length)}
+
             {products.length === 0 ? (
                 <div className="spinner"></div>
             ) : (
-                <div className="w-full grid grid-cols-3 gap-4 p-6 py-2">
-                    {products.map((product) => (
-                        <ProductCard
-                            key={product.id}
-                            product={product.face}
-                            size={product.size}
-                            price={product.size}
-                            date={product.date}
-                        />
-                    ))}
-                </div>
+                <>
+                    {/* Sort section */}
+                    <div className="w-full flex justify-center items-center my-6">
+                        <label className="mr-2 text-lg font-semibold">
+                            Sort By :{' '}
+                        </label>
+                        <select
+                            className="w-1/5 px-2 py-1 rounded-md focus:outline-none text-lg"
+                            onChange={(e) => setSelected(e.target.value)}
+                        >
+                            <option value="">-- Select --</option>
+                            <option value="id">ID</option>
+                            <option value="size">Size</option>
+                            <option value="price">Price</option>
+                        </select>
+                    </div>
+                    {/* End of sort section */}
+
+                    {/* Products display section */}
+                    <div className="w-full grid grid-cols-3 gap-4 p-6 py-2">
+                        {products.map((product) => (
+                            <ProductCard
+                                key={product.id}
+                                product={product.face}
+                                size={product.size}
+                                price={product.price}
+                                date={product.date}
+                            />
+                        ))}
+                    </div>
+                    {/* End of Product display section */}
+                </>
             )}
         </div>
     );

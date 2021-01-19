@@ -5,11 +5,14 @@ const priceFormat = (priceVal) => {
     var dollars = price.slice(0, 1);
     var cents = price.substr(1, price.length);
 
-    if (price.length === 2) {
+    if (price.length === 1) {
+        var convert = `$0.${dollars}0`;
+        return convert;
+    } else if (price.length === 2) {
         var convert = `$${dollars}.${cents}0`;
         return convert;
     } else {
-        var convert = `$${dollars}.${cents}`;
+        var convert = `${dollars}.${cents}`;
         return convert;
     }
 };
