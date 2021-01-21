@@ -63,7 +63,7 @@ You're right! With something open-ended like this you could easily spend a week 
 
 When we grade this exam we're not giving you a "score out of 100" for how many features you complete. We're trying to get some insight into your process, to see the way you work. So, by all means, spend more time if you want to. But you are also free to leave certain features out and give a written explanation of how you would approach it. The best approach is to spend your time on the features that you think is the best way to show us your strengths and experience.
 
-### Developer's note
+## Developer's note
 
 Instruction to install the project :
 
