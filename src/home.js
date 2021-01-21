@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import ProductCard from './product-card';
+import Ads from './ads';
 
 const Home = () => {
     const baseUrl = 'http://localhost:3000';
@@ -10,6 +11,7 @@ const Home = () => {
         limit: 20,
         isLoading: false
     });
+
     const paginationRef = useRef({});
     paginationRef.current = pagination;
 
@@ -23,7 +25,7 @@ const Home = () => {
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [sortRef.current]);
 
     const loadData = (selectedSortBy) => {
         fetch(
@@ -77,6 +79,29 @@ const Home = () => {
         }
     };
 
+    //Product data map to display ProductCard component
+    const renderProducts = pagination.data.map((product) => (
+        <ProductCard
+            key={product.id}
+            product={product.face}
+            size={product.size}
+            price={product.price}
+            date={product.date}
+        />
+    ));
+
+    var renderAds = [];
+    for (var i = 0; i < renderProducts.length; i++) {
+        renderAds.push(renderProducts[i]);
+        if (i % 20 === 19) {
+            renderAds.push(
+                <div className="w-full">
+                    <Ads url={baseUrl} />
+                </div>
+            );
+        }
+    }
+
     return (
         <div className="bg-gray-100 min-h-screen">
             {/* Header Section */}
@@ -97,17 +122,6 @@ const Home = () => {
                 </p>
             </div>
 
-            {/* Ads section */}
-            <div className="w-full my-8 flex justify-center">
-                <img
-                    className="h-48 object-fill bg-no-repeat"
-                    src={`${baseUrl}/ads/?r=${Math.floor(
-                        Math.random() * 1000
-                    )}`}
-                />
-            </div>
-            {/* End of ads section */}
-
             {/* Select sort by section */}
             <div className="w-full flex justify-center items-center my-6">
                 <label className="mr-2 text-lg font-semibold">Sort By : </label>
@@ -124,19 +138,11 @@ const Home = () => {
             {/* End of select sort by section */}
 
             {/* Display products */}
-            <div className="w-full grid grid-cols-4 gap-4 p-6 py-2">
-                {pagination.data.map((product) => (
-                    <ProductCard
-                        key={product.id}
-                        product={product.face}
-                        size={product.size}
-                        price={product.price}
-                        date={product.date}
-                    />
-                ))}
+            <div className="w-full grid grid-cols-1 gap-4 p-6 py-2">
+                {renderAds}
             </div>
             {pagination.isLoading ? (
-                <div className="bg-gray-100 h-32">
+                <div className="bg-gray-100 h-56">
                     <div className="spinner"></div>
                 </div>
             ) : (

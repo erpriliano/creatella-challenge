@@ -12,7 +12,9 @@ const priceFormat = (priceVal) => {
         var convert = `$${dollars}.${cents}0`;
         return convert;
     } else {
-        var convert = `${dollars}.${cents}`;
+        var test = price.slice(0, 2);
+        var test2 = price.substr(2, price.length);
+        var convert = `$${test}.${test2}`;
         return convert;
     }
 };
