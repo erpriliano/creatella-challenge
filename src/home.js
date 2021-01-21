@@ -11,7 +11,8 @@ const Home = () => {
         data: [],
         page: 1,
         limit: 20,
-        isLoading: false
+        isLoading: false,
+        hasMore: true
     });
 
     const paginationRef = useRef({});
@@ -77,7 +78,16 @@ const Home = () => {
             scrollTop + window.innerHeight >= scrollHeight &&
             !paginationRef.current.isLoading
         ) {
-            loadMoreData(sortRef.current, paginationRef.current.page + 1);
+            console.log(paginationRef.current.data.length);
+            if (paginationRef.current.data.length < 500) {
+                loadMoreData(sortRef.current, paginationRef.current.page + 1);
+            } else {
+                setPagination({
+                    ...paginationRef.current,
+                    hasMore: false,
+                    isLoading: false
+                });
+            }
         }
     };
 
@@ -93,6 +103,7 @@ const Home = () => {
     ));
 
     var renderAds = [];
+
     for (var i = 0; i < renderProducts.length; i++) {
         renderAds.push(renderProducts[i]);
         if (i % 20 === 19) {
@@ -120,6 +131,11 @@ const Home = () => {
                 <>{null}</>
             )}
             {/* End of display products */}
+
+            {/* End of catalogue */}
+            <div className="w-full my-4 text-center">
+                {pagination.hasMore ? <>{null}</> : <p>~ END OF CATALOGUE ~</p>}
+            </div>
         </div>
     );
 };
