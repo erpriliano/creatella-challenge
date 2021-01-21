@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
+import Header from './header';
 import ProductCard from './product-card';
+import Sort from './sort';
 import Ads from './ads';
 
 const Home = () => {
@@ -104,39 +106,8 @@ const Home = () => {
 
     return (
         <div className="bg-gray-100 min-h-screen">
-            {/* Header Section */}
-            <div className="w-full bg-white top-0 inset-x-0 px-6 py-3 z-10 fixed shadow-lg">
-                <h1 className="font-bold tracking-wide text-lg">
-                    Products Grid
-                </h1>
-            </div>
-            {/* End of Header Section */}
-            <div className="w-full px-6 pt-16 mb-8 leading-relaxed">
-                <p className="text-base">
-                    Here you're sure to find a bargain on some of the finest
-                    ascii available to purchase. Be sure to peruse our selection
-                    of ascii faces in an exciting range of sizes and prices.
-                </p>
-                <p className="text-base font-semibold">
-                    But first, a word from our sponsors:
-                </p>
-            </div>
-
-            {/* Select sort by section */}
-            <div className="w-full flex justify-center items-center my-6">
-                <label className="mr-2 text-lg font-semibold">Sort By : </label>
-                <select
-                    className="w-1/5 px-2 py-1 rounded-md focus:outline-none text-lg"
-                    onChange={(e) => setSortBy(e.target.value)}
-                >
-                    <option value="">-- Select --</option>
-                    <option value="id">ID</option>
-                    <option value="size">Size</option>
-                    <option value="price">Price</option>
-                </select>
-            </div>
-            {/* End of select sort by section */}
-
+            <Header />
+            <Sort onChange={(e) => setSortBy(e.target.value)} />
             {/* Display products */}
             <div className="w-full grid grid-cols-1 gap-4 p-6 py-2">
                 {renderAds}
