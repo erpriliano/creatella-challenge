@@ -62,3 +62,17 @@ Try to create a simple and elegant UI for this. You are free to use SASS or any 
 You're right! With something open-ended like this you could easily spend a week polishing and getting it just right. We don't expect you to do this, and we'll do our best to make sure you're not disadvantaged by this.
 
 When we grade this exam we're not giving you a "score out of 100" for how many features you complete. We're trying to get some insight into your process, to see the way you work. So, by all means, spend more time if you want to. But you are also free to leave certain features out and give a written explanation of how you would approach it. The best approach is to spend your time on the features that you think is the best way to show us your strengths and experience.
+
+### Developer's note
+
+Instruction to install the project :
+
+1.  Clone this repo into your local folder in your computer
+2.  Via terminal, run `cd creatella-challenge`
+3.  Install dependencies by running `npm install`
+
+Instruction to run the app :
+
+1.  I did not change any files inside the server, so you need to run `npm run start` in order to start the server
+2.  Then you need to run `npm run dev` to run the app
+3.  The app run best in browser, although I already made it responsive by using additional css framework (tailwindcss)
