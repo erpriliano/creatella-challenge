@@ -109,7 +109,7 @@ const Home = () => {
             <Header />
             <Sort onChange={(e) => setSortBy(e.target.value)} />
             {/* Display products */}
-            <div className="w-full grid grid-cols-1 gap-4 p-6 py-2">
+            <div className="w-full grid md:grid-cols-2 lg:grid-cols-4 gap-4 p-6 py-2">
                 {renderAds}
             </div>
             {pagination.isLoading ? (

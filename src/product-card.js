@@ -34,7 +34,7 @@ const dateFormat = (date) => {
 
 const ProductCard = ({ product, size, price, date }) => {
     return (
-        <div className="bg-white p-3 flex flex-col justify-between overflow-hidden shadow-md rounded-md transition-all hover:shadow-2xl duration-500">
+        <div className="w-3/4 lg:w-full mx-auto bg-white p-3 flex flex-col justify-between overflow-hidden shadow-md rounded-md transition-all hover:shadow-2xl duration-500">
             <h1
                 style={{ fontSize: size }}
                 className="w-full py-2 flex justify-center"
